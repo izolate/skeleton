@@ -1,33 +1,27 @@
-var express = require('express');
-var config = require('./config');
-var app = express();
+require('dotenv').load()
+const express = require('express')
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const app = express()
 
-// logs
-var log = require('winston').loggers.get('app:server');
+// Configuration
+app.set('port', process.env.NODE_PORT || 3000)
+app.set('views', `${__dirname}/views`)
+app.set('view engine', 'jade')
+app.use('/static', express.static(`${__dirname}/static`))
+app.locals.pretty = (process.env.MINIFY === 'false')
 
-// views
-app.set('views', __dirname + '/views');
-app.set('view engine', 'jade');
+// Body parsing & Cookies
+app.use(bodyParser.urlencoded({ extended: false })) // application/x-www-form-urlencoded
+app.use(bodyParser.json()) // application/json
+app.use(cookieParser())
 
-// static files
-app.use('/assets', express.static(__dirname + '/assets'));
+// Routes
+app.use('/', require('./routes'))
+app.use('/module', require('./module/routes'))
 
-// routes
-var module = require('./module/routes');
-app.use('/module', module);
-
-[
-  './routes/site'
-  // add more...
-].forEach(function (routePath) {
-  require(routePath)(app);
-});
-
-app.listen(config.express.port, config.express.ip, function (error) {
-  if (error) {
-    log.error('Unable to listen for connections', error);
-    process.exit(10);
-  }
-  log.info('app is listening on http://' +
-    config.express.ip + ':' + config.express.port);
-});
+// Run
+app.listen(app.get('port'), err => {
+  if (err) console.error(err)
+  else console.log(`Server started: http://localhost:${app.get('port')}/`)
+})
