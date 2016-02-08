@@ -7,8 +7,8 @@ const buffer = require('vinyl-buffer')
 
 const DEVELOPMENT = (process.env.NODE_ENV === 'development')
 
-gulp.task('js', function () {
-  return browserify(`${process.env.STATIC_DIR}/src/js/index.js`, { debug: DEVELOPMENT })
+gulp.task('js', () => {
+  return browserify(`${process.env.STATIC_DIR}/js/index.js`, { debug: DEVELOPMENT })
     .transform(babelify.configure({
       sourceMaps: DEVELOPMENT
     }))
