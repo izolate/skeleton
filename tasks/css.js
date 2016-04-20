@@ -2,26 +2,18 @@ const gulp = require('gulp')
 const _ = require('gulp-load-plugins')()
 const cssnext = require('postcss-cssnext')
 const modules = require('postcss-modules')
-
-const rupture = require('rupture')
+const sugarss = require('sugarss')
 
 gulp.task('css', () => {
-  return gulp.src(`${process.env.STATIC_DIR}/css/index.css`)
+  return gulp.src(`${process.env.STATIC_DIR}/css/index.sss`)
     .pipe(_.sourcemaps.init())
     .pipe(_.postcss([
       modules,
       cssnext
-    ]))
-    .pipe(_.sourcemaps.write('.'))
-    .pipe(gulp.dest(`${process.env.STATIC_DIR}/dist`))
-})
-
-gulp.task('old-css', () => {
-  return gulp.src(`${process.env.STATIC_DIR}/styl/index.styl`)
-    .pipe(plugins.stylus({
-      use: [rupture()]
+    ], {
+      parser: sugarss
     }))
-    .pipe(plugins.autoprefixer())
-    .pipe(plugins.csso())
+    .pipe(_.rename({ extname: '.css' }))
+    .pipe(_.sourcemaps.write('.'))
     .pipe(gulp.dest(`${process.env.STATIC_DIR}/dist`))
 })
