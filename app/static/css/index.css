@@ -1,0 +1,7 @@
+:root {
+  --myVar: '#000';
+}
+
+body {
+  background-color: var(--myVar);
+}
