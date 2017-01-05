@@ -1,1 +1,0 @@
-{"version":3,"sources":["index.sss"],"names":[],"mappings":"AAGA;EACE,wBAA8B;CAD5B","file":"index.css","sourcesContent":[":root\n  --myVar: '#000'\n\nbody\n  background-color: var(--myVar)\n"]}

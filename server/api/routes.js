@@ -1,10 +1,7 @@
-/**
- * Routes for an example module
- */
 const router = module.exports = require('express').Router()
 
+// route-specific middleware
 router.use((req, res, next) => {
-  // route-specific middleware
   next()
 })
 

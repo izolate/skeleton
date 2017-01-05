@@ -1,4 +1,5 @@
 require('dotenv').load()
+
 const express = require('express')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
@@ -18,8 +19,8 @@ app.use(bodyParser.json()) // application/json
 app.use(cookieParser())
 
 // Routes
-app.use('/', require('./routes'))
-app.use('/module', require('./module/routes'))
+app.use('/api', require('./api/routes'))
+app.get('*', (req, res, next) => res.render('layout'))
 
 // Run
 app.listen(app.get('port'), err => {
