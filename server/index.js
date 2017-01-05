@@ -2,13 +2,14 @@ require('dotenv').load()
 const express = require('express')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
+const path = require('path')
 const app = express()
 
 // Configuration
 app.set('port', process.env.NODE_PORT || 3000)
 app.set('views', __dirname)
 app.set('view engine', 'pug')
-app.use('/dist', express.static(`${__dirname}/client/dist`))
+app.use('/dist', express.static(path.resolve(__dirname, '../client/dist')))
 app.locals.pretty = (process.env.MINIFY === 'false')
 
 // Body parsing & Cookies
