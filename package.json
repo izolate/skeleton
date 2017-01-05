@@ -1,13 +1,14 @@
 {
   "name": "skeleton",
-  "version": "1.0.0",
-  "description": "Starter skeleton for a web app",
+  "version": "2.0.0",
+  "description": "Skeleton for a modern JavaScript webapp",
   "main": "app/index.js",
   "scripts": {
     "develop": "npm run js:dev",
     "js:dev": "browserify app/static/js/index.js -t babelify --debug -o app/static/dist/index.js",
     "js:prd": "browserify app/static/js/index.js -t babelify -t uglifyify -o app/static/dist/index.js",
-    "start": "node --use_strict app/index"
+    "start": "node --use_strict server/index",
+    "start:dev": "nodemon --use-strict server/"
   },
   "repository": {
     "type": "git",
@@ -37,13 +38,16 @@
     "gulp-sourcemaps": "^2.0.0-alpha",
     "gulp-stylus": "^2.0.5",
     "gulp-uglify": "^1.2.0",
-    "jade": "^1.11.0",
     "postcss": "^5.0.19",
     "postcss-cssnext": "^2.5.2",
     "postcss-modules": "^0.4.1",
+    "pug": "^2.0.0-beta6",
     "require-dir": "^0.3.0",
     "sugarss": "^0.1.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }

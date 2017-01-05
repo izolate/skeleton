@@ -6,9 +6,9 @@ const app = express()
 
 // Configuration
 app.set('port', process.env.NODE_PORT || 3000)
-app.set('views', `${__dirname}/views`)
-app.set('view engine', 'jade')
-app.use('/static', express.static(`${__dirname}/static`))
+app.set('views', __dirname)
+app.set('view engine', 'pug')
+app.use('/dist', express.static(`${__dirname}/client/dist`))
 app.locals.pretty = (process.env.MINIFY === 'false')
 
 // Body parsing & Cookies
