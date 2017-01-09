@@ -1,29 +1,40 @@
-require('dotenv').load()
+// Environment variables
+import dotenv from 'dotenv'
+dotenv.load()
 
-const express = require('express')
-const bodyParser = require('body-parser')
-const cookieParser = require('cookie-parser')
-const path = require('path')
-const app = express()
+// Imports
+import Koa from 'koa'
+import Pug from 'koa-pug'
+import route from 'koa-route'
+import serve from 'koa-static'
+import mount from 'koa-mount'
+import json from 'koa-json'
+import path from 'path'
+import api from './api/routes'
+
+const pretty = process.env.NODE_ENV === 'development'
+
+// Initialise
+const app = new Koa()
+const pug = new Pug({
+  viewPath: path.resolve(__dirname, '../server'),
+  pretty
+})
 
 // Configuration
-app.set('port', process.env.NODE_PORT || 3000)
-app.set('views', __dirname)
-app.set('view engine', 'pug')
-app.use('/dist', express.static(path.resolve(__dirname, '../client/dist')))
-app.locals.pretty = (process.env.MINIFY === 'false')
-
-// Body parsing & Cookies
-app.use(bodyParser.urlencoded({ extended: false })) // application/x-www-form-urlencoded
-app.use(bodyParser.json()) // application/json
-app.use(cookieParser())
+pug.use(app)
+app.use(mount('/dist', serve(path.resolve(__dirname, '../dist'))))
+app.use(json({ pretty }))
 
 // Routes
-app.use('/api', require('./api/routes'))
-app.get('*', (req, res, next) => res.render('layout'))
+app.use(api.routes())
+app.use(api.allowedMethods())
+app.use(route.get('*', async (ctx) => ctx.render('layout')))
+
+// Settings
+app.port = process.env.NODE_PORT || 3000
+app.name = process.env.APP_NAME || 'skeleton'
 
 // Run
-app.listen(app.get('port'), err => {
-  if (err) console.error(err)
-  else console.log(`Server started: http://localhost:${app.get('port')}/`)
-})
+app.listen(app.port)
+console.log(`[${app.env}] ${app.name} listening on port ${app.port}`)

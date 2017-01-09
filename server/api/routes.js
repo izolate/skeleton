@@ -1,10 +1,14 @@
-const router = module.exports = require('express').Router()
+import Router from 'koa-router'
+
+const router = Router({ prefix: '/api' })
 
 // route-specific middleware
-router.use((req, res, next) => {
+router.use(async (ctx, next) => {
   next()
 })
 
-router.get('/endpoint', (req, res, next) => {
-  res.json({ message: 'Hello World!' })
+router.get('/', async (ctx, next) => {
+  ctx.body = { message: 'Hello World!' }
 })
+
+export default router
