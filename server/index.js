@@ -9,6 +9,7 @@ import route from 'koa-route'
 import serve from 'koa-static'
 import mount from 'koa-mount'
 import json from 'koa-json'
+import mongo from 'koa-mongo'
 import path from 'path'
 import api from './api/routes'
 
@@ -25,6 +26,13 @@ const pug = new Pug({
 pug.use(app)
 app.use(mount('/dist', serve(path.resolve(__dirname, '../dist'))))
 app.use(json({ pretty }))
+
+// Database
+app.use(mongo({
+  host: process.env.MONGODB_HOST || 'localhost',
+  port: process.env.MONGODB_HOST || 27017,
+  db: process.env.MONGODB_DATABASE || 'skeleton'
+}))
 
 // Routes
 app.use(api.routes())
