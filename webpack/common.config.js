@@ -23,38 +23,8 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: 'babel-loader'
       },
-
-      // CSS (Plain)
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader?importLoaders=1',
-        ]
-      },
-
-      // CSS (SugarSS)
-      {
-        test: /\.sss$/,
-        use: [
-          'style-loader',
-          'css-loader?importLoaders=1',
-          'postcss-loader'
-        ]
-      },
-
-      // Images
-      {
-        test: /\.svg$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            emitFile: false
-          }
-        }]
-      }
     ]
   },
 

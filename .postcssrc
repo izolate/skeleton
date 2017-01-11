@@ -2,6 +2,8 @@
   "parser": "sugarss",
   "map": true,
   "plugins": {
+    "postcss-import": {},
+    "postcss-mixins": {},
     "postcss-cssnext": {}
   }
 }
