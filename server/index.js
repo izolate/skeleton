@@ -30,7 +30,7 @@ app.use(json({ pretty }))
 // Database
 app.use(mongo({
   host: process.env.MONGODB_HOST || 'localhost',
-  port: process.env.MONGODB_HOST || 27017,
+  port: process.env.MONGODB_PORT || 27017,
   db: process.env.MONGODB_DATABASE || 'skeleton'
 }))
 
