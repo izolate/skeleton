@@ -1,39 +1,39 @@
-# App Skeleton
+# Skeleton
 
-A starting point for an Node.js 5.x application. A minimal, and hopefully elegant foundation that aims to reduce the time it takes to build an app from scratch.
-
-Using ECMAScript 2015+ wherever possible, and staying true to the [12 factor app](http://12factor.net).
+Skeleton for a modern JavaScript webapp. A minimal, elegant and extendable foundation that aims to reduce the time it takes to build an app from scratch. 
 
 ### Components
-Type | Name
---- | ---
-Programming language | [Node.js](https://nodejs.org)
-Web App framework | [Express.js](http://expressjs.com)
-Database | [MongoDB](https://www.mongodb.org)
-HTML Templating | [Jade](http://jade-lang.com)
-CSS Preprocessor | [Stylus](https://learnboost.github.io/stylus)
-Frontend modules | [Browserify](http://browserify.org)
-JavaScript transpiler | [Babel.js](http://babeljs.io)
-Build tools | [Gulp.js](http://gulpjs.com), [npm](https://www.npmjs.com)
+Name | Version | Usage
+--- | --- | ---
+JavaScript, [Node.js](https://nodejs.org) | ES2015+, 7.x | Programming languages
+[Koa.js](http://koajs.com) | 2.x | Web app framework (server-side)
+[React.js](https://facebook.github.io/react/) | 15.x | Web app framework (client-side)
+[MongoDB](https://www.mongodb.org) | | Database
+[Pug](http://pugjs.org) | | HTML templating (server-side)
+[Babel.js](http://babeljs.io) | | JavaScript transpiler
+[PostCSS](http://postcss.org) | | CSS Preprocessor
+[Webpack](https://webpack.js.org/) | 2.x | Asset/module bundler
 
 
 ## Development
 
-Clone the repo and install depedencies:
+Pre-requisites:
+```bash
+# Install dependencies
+yarn
 
-```
-git clone git@github.com:izolate/skeleton.git
-cd skeleton
-npm install
-```
+# Run tasks & watch for changes
+yarn develop
 
-Run build tasks with either Gulp or npm:
-```
-gulp develop
-npm run develop
+# Or don't watch
+yarn build
 ```
 
-Start the server:
-```
-npm start
+Finally, start the server:
+```bash
+# Watch for file changes
+yarn start:dev
+
+# Or don't
+yarn start
 ```
